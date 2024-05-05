@@ -1,0 +1,27 @@
+{% extends "base.html" %}   
+
+{% block 'head'%}
+{% endblock %}
+
+{% block 'title' %}Cadastro de Jogador(a){% endblock %}
+
+
+{% block 'dashboard' %}
+{% endblock %}
+
+
+{% block 'body' %}
+
+<div class="container" style="background-color:#9ff9ff">
+  <h1>Cadastro para Jogador(a)</h1>
+  <form action = "{% url 'inclui_jogador' %}" method='POST'>
+    {% csrf_token %}    
+    {{ form.as_p }}
+
+  <!--nome: <input type="text"><br>
+  apelido: <input type="text"><br>
+  data de nascimento: <input type="text"><br>-->
+  <input type="submit" class='btn btn-success' value="Cadastrar">
+</div>
+
+{% endblock %}
