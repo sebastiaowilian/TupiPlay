@@ -72,12 +72,14 @@ class Jogador(models.Model):
     @nm_senha.setter
     def nm_senha(self, value):
             #TODO: verificar se é um insert ou não
+            print (value)
             if len(value) > 12:
                 self._nm_senha = make_password(password=value, salt=None, hasher='pbkdf2_sha256')
             else:
                 self._nm_senha = self._nm_senha 
 
-    def identifica_jogador(email, senha_informada):   
+    #TODO:Como salvar a senha encriptada sem reencriptar 2 X
+    '''def identifica_jogador(email, senha_informada):   
         #TODO: Buscar jogador no banco de dados             
         jogador = Jogador # nm_email=email; nm_seha = CSenha
         if jogador:
@@ -90,7 +92,7 @@ class Jogador(models.Model):
             return False   
 
 
-    '''def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs):
         if not self.protocole:
             self.protocole = datetime.now().strftime("%d/%m/%Y-%H:%M:%S-") + token_hex(16)
 

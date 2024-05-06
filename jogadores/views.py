@@ -1,43 +1,64 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.http import HttpResponseRedirect
+from django.contrib.auth.hashers import make_password
 from django.views.generic import CreateView
+from django.urls import reverse
 from django.urls import reverse_lazy
 from django.http import HttpResponse
+
 #import os
 # Importação de código criados por nós
 from .models import Jogador
-from .forms import FormJogador
+from .forms import FormJogador, FormIdentificaJogador
 
 #diretorio_raiz = os.path.dirname(os.path.abspath(__file__))
 #caminho_template = os.path.join(diretorio_raiz, 'templates', 'home.html')
 # Definição das CBVs: Class Based Views
-class JogadorCreateView(CreateView): 
+class JogadorCreateView(CreateView):
     model = Jogador
-    fields = ["nm_joador","nm_avatar","nm_arquivo_imagem","dt_nascimento","cd_cep","nm_email","nm_senha","dt_inclusao","id_escolaridade_id","tp_genero","id_idioma_id"]
+    fields = ["nm_jogador","nm_avatar","nm_arquivo_imagem","dt_nascimento","cd_cep","nm_email","nm_senha","dt_inclusao","id_escolaridade_id","tp_genero","id_idioma_id"]
     sucess_url = reverse_lazy("identifica_jogador")
 
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+    # Acessa informações da sessão
+    print('Sebastiao')
+    print(request.session)
+    id = request.session.get('id_jogador', 'None') #'1' #request.session['id_jogador']
+    avatar =  request.session.get('nm_avatar','None')
+    nome =  request.session.get('nm_jogador', 'None')
+
+    # Passa os valores para o contexto
+    context = {'id_jogador': id, 'nm_avatar': avatar, 'nm_jogador': nome}
+    return render(request, 'home.html', context)
 
 def identifica_jogador(request):
     if request.method == "GET":
-        #form = FormJogador()
+        form = FormIdentificaJogador()
         #return render(request, 'inclui_jogador.html', {'form':form})
-        return render(request, "identifica_jogador.html")
+        return render(request, "identifica_jogador.html",{'form':form})
     elif request.method== "POST":
-        form = FormJogador(request.POST)
-        if form.is_valid():            
-            request.session['id_jogador'] = '1'
-            request.session['nm_avatar'] = 'Sebah'
-            request.session['nm_jogador'] = 'Sebastião Wilian da Silva Cardoso'
+        form = FormIdentificaJogador(request.POST)
+        if form.is_valid():  
+            email = form.cleaned_data['nm_email']
+            senha = form.cleaned_data['_nm_senha']    
 
-            #form.save()
-            #return HttpResponse('Salvo com sucesso')
-            return render(request, 'home.html', {'form': form})
+            jogador = Jogador.objects.filter(nm_email=email,_nm_senha=senha).first()
+            request.session.clear()
+            if jogador:                
+                request.session['id_jogador'] = jogador.id_jogador
+                request.session['nm_avatar'] = jogador.nm_avatar
+                request.session['nm_jogador'] = jogador.nm_jogador
+                #return render(request, 'home.html', {'form': form})
+                return redirect(reverse('home'), {'form': form})
+            else:
+                form.add_error(None, 'Email ou senha inválidos')
+                return render(request, 'identifica_jogador.html', {'form': form})
+                #return redirect(reverse('identifica_jogador'), {'form': form})
         else:
             return render(request, 'identifica_jogador.html', {'form': form})    
-    
+            #return redirect(reverse('identifica_jogador'), {'form': form})
     
 
 def inclui_jogador(request):
@@ -48,8 +69,9 @@ def inclui_jogador(request):
         form = FormJogador(request.POST)
         if form.is_valid():
             form.save()
-            #return HttpResponse('Salvo com sucesso')
-            return render(request, 'identifica_jogador.html', {'form': form})
+            #return render(request, 'identifica_jogador.html', {'form': form})
+            return redirect(reverse('identifica_jogador'), {'form': form})
         else:
             return render(request, 'inclui_jogador.html', {'form': form})
+            #return redirect(reverse('inclui_jogador'), {'form': form})
         
