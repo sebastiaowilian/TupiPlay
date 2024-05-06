@@ -4,8 +4,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static '/css/layoutBase.css' %}">
     <!--<link rel="stylesheet" href="{% static 'general/css/base.css' %}">
     <link rel="stylesheet" href="{% static 'general/css/general.css' %}">-->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -16,12 +16,18 @@
 
   </head>
   <body>   
-    <nav style="background-color:#127780 !important;" class="navbarnavbar-light bg-light">
+    <!--<nav style="background-color:#127780 !important;" class="navbarnavbar-light bg-light">
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1" style="color:#15eda3">Tupi Play</span>
       </div>
-    </nav> 
-    <br>
+    </nav> -->
+    <!-- Agrupa os elementos que compõe o cabeçalho. -->
+    <header>
+      <a href="{% url 'home' %}" id="logo"><img style="width:284px;height:234px" src="{% static '/img/LogoTupiPlayVerde_Looka.png' %}" alt="Tupi Play" title="Logo Tupi Play"></a>
+      <div class="minha-div"><button id="openMenu">&#9776;</button></div>
+      
+    </header>    
+    
     <section class="home-section">
       {% block 'dashboard'%}
       {% endblock %}
@@ -30,7 +36,11 @@
     {% block 'body' %}
     {% endblock %}
 
-    <!--<script src="{% static 'general/js/base.js' %}"></script>-->
+	  <!-- Agrupa informações de autoria, direitos autorais, contato, 
+		   mapa do site, links e documento relacionados. -->
+       <footer>Footer</footer>
+
+    <script src="{% static '/js/scriptBase.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
