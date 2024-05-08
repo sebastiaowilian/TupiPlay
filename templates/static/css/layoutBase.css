@@ -29,6 +29,7 @@ body {
 
 	/* Margem de todos os lados. */
 	margin: 3px;
+	
 }
 
 /* Formatação comum entre os elementos. */
@@ -77,7 +78,6 @@ header {
 	text-align: center; /* Centraliza o texto horizontalmente */
 	text-decoration: none; /* Remove sublinhado padrão em links */
  }
- 
   
 .botao:hover {
 	background-color: #0056b3; /* Cor de fundo ao passar o mouse */
@@ -152,7 +152,9 @@ main {
 	/* da altura dos elementos ( 400px ) com as suas margens ( 36px ). */
 	
 	/* Ocupa 100% da altura da tela de exibição. */
-	/*height: 100vh;*/
+	height: 100%;
+	overflow: auto;
+	background-color:#F4F5F5;
 }
 
 aside {
