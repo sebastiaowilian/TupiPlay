@@ -1,6 +1,10 @@
 {% extends "base.html" %}   
 
+{% block 'head'%}{% endblock %}
+
 {% block 'title' %}Identifique-se{% endblock %}
+
+{% block 'dashboard' %}{% endblock %}
 
 {% block 'body' %}
 
@@ -11,8 +15,7 @@
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit">Entrar</button>
+      <input type="submit" class='btn btn-success' value="Entrar">
     </form>        
-  </div>
-
+  </div>  
 {% endblock %}

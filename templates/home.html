@@ -3,6 +3,27 @@
 
 {% block 'head' %}
     <!--<link rel="stylesheet" href="{% static 'clientes/css/clientes.css' %}">-->    
+    <style type="text/css">  
+          .divTemplateTitulo{
+            flex: 1; 
+            background-color: #1D7D86;
+            border: 1px solid #ccc;
+            font-size:20px;
+            color: #15EDA3;
+            font-weight:bold;
+            border-bottom-left-radius: 13px;
+            border-bottom-right-radius: 13px;
+            border: 1px solid #ccc;
+            padding: 12px;            
+            margin: 0px;
+          }   
+          .divTemplateConteudo{
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            padding: 20px;
+            margin: 0px;
+          }  
+    </style>
 {% endblock %}
 
 {% block 'title' %}Tupi Play - Jogar para revitalizar{% endblock %}
@@ -12,16 +33,11 @@
 {% endblock%}
 
 {% block 'body' %}
-<div class="container"style="background-color:#D9D9D9">
-    <div class="row">
-        <div onclick="alert('Você está na HomPage do Site" style="width:100%">
-            <p style="color:#1D7D86;font-size:30px;text-align:center; ">HOME PAGE DO SITE TUPI PLAY </p>
-            <br>
-            <h1>Informações da Sessão</h1>
-            <p>ID do Jogador: {{ id_jogador }}</p>
-            <p>Nome do Jogador: {{ nm_jogador }}</p>
-            <p>Nome do Avatar:{{ nm_avatar}}
-        </div> 
+<div class="container" style="display: flex;flex-direction: column;height: 100%;width:100%;">
+    <div class="divTemplateTitulo">Div 1</div>
+    <div class="divTemplateConteudo" style="height:50px">Div 2dafasfasdfaafsd
+        afdsasdfasfa
+        sfafsa
     </div>
 </div>
 {% endblock%}

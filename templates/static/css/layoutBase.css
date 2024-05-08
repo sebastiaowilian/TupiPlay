@@ -59,16 +59,29 @@ header, nav, main, aside, footer {
 header {
 	/* Altura do elemento. */
 	height: 234px;
-	background: #127780 !important;
+	background-color: #127780 !important;
+	justify-content:space-between;
+	align-items:flex-end;
 }
 
-
-.minha-div {
-    width: 400px; /* largura da div */
-    height: 300px; /* altura da div */
-    background-image: url("{% static '/img/LogoTupiPlayVerde_Looka.png' %}"); /* imagem de fundo */
-    background-size: cover; /* redimensionar imagem para cobrir a div */
-	opacity: 0.7; /* transparência (valor entre 0 e 1) */
+.botao {
+	display: inline-block;
+	padding: 3px 12px;
+	background-color: #007bff; /* Cor de fundo do botão */
+	color: #fff; /* Cor do texto do botão */
+	border: 1px solid #007bff; /* Borda do botão */
+	color: #fff; /* Cor do texto do botão */
+	border: 1px solid #007bff; /* Borda do botão */
+	border-radius: 8px; /* Arredondamento das bordas */
+	cursor: pointer; /* Altera o cursor ao passar o mouse sobre o botão */
+	text-align: center; /* Centraliza o texto horizontalmente */
+	text-decoration: none; /* Remove sublinhado padrão em links */
+ }
+ 
+  
+.botao:hover {
+	background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+	border-color: #0056b3; /* Cor da borda ao passar o mouse */
 }
 
 header #logo {
@@ -137,7 +150,9 @@ nav a {
 main {
 	/* Realizar a subtração de 100% da altura vertical menos a soma    */
 	/* da altura dos elementos ( 400px ) com as suas margens ( 36px ). */
-	height: calc(100vh - 436px);
+	
+	/* Ocupa 100% da altura da tela de exibição. */
+	/*height: 100vh;*/
 }
 
 aside {
@@ -147,7 +162,9 @@ aside {
 
 footer {
 	/* Altura do elemento. */
-	height: 100px;
+	height: 70px;
+	background-color: #127780;
+	padding:10px;
 }
 
 a {
@@ -157,6 +174,8 @@ a {
 	/* Definir a cor da fonte para o padrão do elemento pai. */
 	color: inherit;
 }
+
+
 
 /* Altera o estilo dos elementos para serem apresentados */ 
 /* em telas menores que 717px. */
@@ -221,6 +240,7 @@ a {
 	main {
 		/* Realizar a subtração de 100% da altura vertical menos a soma    */
 		/* da altura dos elementos ( 300px ) com as suas margens ( 30px ). */
-		height: calc(100vh - 330px);
+		/* height: calc(100vh - 330px);*/
+		
 	}
 }
