@@ -1,0 +1,119 @@
+{% extends "base.html" %}   
+
+{% block 'head'%}
+<style type="text/css">  
+  .divTemplateTitulo{
+    flex: 1; 
+    width: 100%;
+    height:50px;
+    background-image: linear-gradient(to bottom, #1D7D86, #66CCA4);    
+    /*background-color: #1D7D86;*/
+    border: 1px solid #ccc;
+    font-size:22px;
+    color: #15EDA3;
+    font-weight:bold;
+    border-bottom-left-radius: 13px;
+    border-bottom-right-radius: 13px;
+    border: 1px solid #ccc;
+    padding: 7px; 
+    padding-left:16px;           
+    margin: 0px;
+  }   
+  .divTemplateConteudo{
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding:16px;
+    margin: 0px;
+    height:100tw;
+    overflow:auto;            
+  }  
+  .divTemplateConteudoTopo{
+    background-color:#D9D9D9;    
+    /*padding-top:10px;         */
+    padding:0px 10px 10px 10px; 
+    margin-bottom:16px;    
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }  
+  .divTemplateConteudoTopoDetalhe{
+    background-color:#F5F5F5;    
+    margin-top:10px;    
+    /*margin-right:10px;    */
+    padding:15px 30px 15px 15px;
+    width:80px;  
+  }  
+  .divTemplateConteudoBotao{
+    padding-top:16px;         
+    padding-bottom:0px; 
+    margin-bottom:-6px;
+  }  
+</style>
+{% endblock %}
+
+{% block 'title' %}Q U I Z{% endblock %}
+
+{% block 'dashboard' %}{% endblock %}
+
+{% block 'body' %}
+  <div class="container" style="padding-top:3%;padding-bottom:3%">
+    <div class="divTemplateTitulo">Q U I Z</div>
+    
+        
+        <form>
+          <div class="divTemplateConteudo">
+            <div class="divTemplateConteudoTopo">     
+              <div class="divTemplateConteudoTopoDetalhe">                  
+                <label for="id_qt_partida">Partida:</label>
+                <input type="text" name="qt_partida" maxlength="15" style="width:50px;border:0" readonly id="id_qt_partida">
+              </div>
+              <div class="divTemplateConteudoTopoDetalhe">                  
+                <label for="id_num_questao">Questão:</label>
+                <input type="text" name="num_questao" maxlength="15" style="width:50px" id="id_num_questao">
+              </div>
+              <div class="divTemplateConteudoTopoDetalhe">                  
+                <label for="id_qt_pontos">Pontos:</label>
+                <input type="text" name="qt_pontos" maxlength="15" style="width:50px" id="id_qt_pontos">
+              </div>
+              <div class="divTemplateConteudoTopoDetalhe">                  
+                <label for="id_qt_tempo">Tempo:</label>
+                <input type="text" name="qt_tempo" maxlength="15" style="width:50px" id="id_qt_tempo">
+              </div>
+              <div class="divTemplateConteudoTopoDetalhe">                  
+                <label for="id_qt_acerto">Acertos:</label>
+                <input type="text" name="qt_acerto" maxlength="15" style="width:50px" id="id_qt_acerto">
+              </div>  
+              <div class="divTemplateConteudoTopoDetalhe">                  
+                <label for="id_qt_erro">Erros:</label>
+                <input type="text" name="qt_erro" maxlength="15" style="width:50px" id="id_qt_erro">
+              </div>  
+              <div class="divTemplateConteudoTopoDetalhe">                  
+                <label for="id_nm_jogador">Jogador:</label>
+                <input type="text" name="nm_jogador" maxlength="15" style="width:50px" id="id_nm_jogador">
+              </div>                                      
+            </div>
+            <p style="font-size:18px;color:black;">Como se diz em Tupi <span style="font-size:20px;color:black;font-weight:bold;">“Eu tenho cabelos muito arrepiados”</span> ?</p>
+            <label for="opcao1">
+              <input type="checkbox" id="opcao1" name="opcoes" value="Abá mundé supa, i pora rá">Abá mundé supa, i pora rá
+            </label><br>
+            <label for="opcao2">
+              <input type="checkbox" id="opcao2" name="opcoes" value="Xe 'a-tyragûasu"> Xe 'a-tyragûasu
+            </label><br>
+            <label for="opcao3">
+              <input type="checkbox" id="opcao3" name="opcoes" value="Osem oîkobébo, o tym-y roîré"> Osem oîkobébo, o tym-y roîré
+            </label><br>
+            <label for="opcao4">
+                <input type="checkbox" id="opcao4" name="opcoes" value="Xe posaûsupe asepîak"> Xe posaûsupe asepîak
+              </label><br>
+              <label for="opcao5">
+                <input type="checkbox" id="opcao5" name="opcoes" value="Osem oîkobébo, o tym-y roîré"> Nde resé memẽ oroîkó
+              </label><br> 
+            
+          <div class="divTemplateConteudoBotao">                       
+              <input type="submit" class='btn btn-success' style="margin-right:20px" value="Responder"><input type="submit" class='btn btn-primary' style="margin-right:20px" value="Pular"><input type="submit" class='btn btn-danger' style="margin-right:20px" value="Encerrar">
+          </div>
+        </div>
+        </form>
+        
+  </div>    
+{% endblock %}

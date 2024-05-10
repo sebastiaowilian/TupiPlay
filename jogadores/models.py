@@ -2,24 +2,22 @@ from django.db import models
 from django.contrib.auth.hashers import make_password, check_password
 from django.core.validators import validate_email
 from email.policy import default
-#from secrets import token_hex, token_urlsafe
-#from datetime import datetime
 from django.utils import timezone
 from .choices import Choices_Tipo_Genero
 
 # Create your models here.
 class Idioma(models.Model):
-    id_idioma = models.AutoField(primary_key=True, default=0)
-    nm_idioma = models.CharField(max_length=30,unique=True)
-    ds_idioma = models.CharField(max_length=50, null=True)
-    nm_arquivo_imagem = models.CharField(max_length=50, null=True)
-    nm_arquivo_estilo_css = models.CharField(max_length=50, null=True)
-    dt_inclusao = models.DateTimeField(auto_now_add=True)
-    id_usuario_inclusao = models.IntegerField(default=0)
-    dt_alteracao = models.DateTimeField(auto_now_add=True, blank=True, null=True) #Pode receber None
-    id_usuario_alteracao = models.IntegerField(default=0, null=True)
-    dt_exclusao = models.DateTimeField(auto_now_add=True, blank=True, null=True) #Pode receber None
-    id_usuario_exclusao = models.IntegerField(default=0, null=True)
+    id_idioma = models.AutoField(primary_key=True, default=0, verbose_name='ID idioma')
+    nm_idioma = models.CharField(max_length=30,unique=True, verbose_name='Nome idioma')
+    ds_idioma = models.CharField(max_length=50, null=True, verbose_name='Descrição idioma')
+    nm_arquivo_imagem = models.CharField(max_length=50, null=True, verbose_name='Nome arquivo imagem')
+    nm_arquivo_estilo_css = models.CharField(max_length=50, null=True, verbose_name='Nome arquivo estilo CSS')
+    dt_inclusao = models.DateTimeField(auto_now_add=True, verbose_name='Data inlusão')
+    id_usuario_inclusao = models.IntegerField(default=0, verbose_name='Usuário inclusao')
+    dt_alteracao = models.DateTimeField(auto_now_add=True, blank=True, null=True, verbose_name='Data alteração') #Pode receber None
+    id_usuario_alteracao = models.IntegerField(default=0, null=True, verbose_name='Usuário alteração')
+    dt_exclusao = models.DateTimeField(blank=True, null=True, verbose_name='Data exclusão') #Pode receber None
+    id_usuario_exclusao = models.IntegerField(default=0, null=True, verbose_name='Usuário exclusão')
 
     def __str__(self) -> str:
         return self.nm_idioma
@@ -30,19 +28,19 @@ class Escolaridade(models.Model):
     nm_escolaridade = models.CharField(max_length=30, unique=True)
     ds_escolaridade = models.CharField(max_length=100, null=True)
     vl_escolaridade = models.IntegerField(default=0, null=True)
-    dt_inclusao = models.DateTimeField(auto_now_add=True)
-    id_usuario_inclusao = models.IntegerField(default=0)
-    dt_alteracao = models.DateTimeField(auto_now_add=True, blank=True, null=True) #Pode receber None
-    id_usuario_alteracao = models.IntegerField(default=0, null=True)
-    dt_exclusao = models.DateTimeField(auto_now_add=True, blank=True, null=True) #Pode receber None
-    id_usuario_exclusao = models.IntegerField(default=0, null=True)
+    dt_inclusao = models.DateTimeField(auto_now_add=True, verbose_name='Data inlusão')
+    id_usuario_inclusao = models.IntegerField(default=0, verbose_name='Usuário inclusao')
+    dt_alteracao = models.DateTimeField(auto_now_add=True, blank=True, null=True, verbose_name='Data alteração') #Pode receber None
+    id_usuario_alteracao = models.IntegerField(default=0, null=True, verbose_name='Usuário alteração')
+    dt_exclusao = models.DateTimeField(blank=True, null=True, verbose_name='Data exclusão') #Pode receber None
+    id_usuario_exclusao = models.IntegerField(default=0, null=True, verbose_name='Usuário exclusão')
 
     def __str__(self) -> str:
         return self.nm_escolaridade
     
 
 class Jogador(models.Model):    
-    id_jogador = models.AutoField(primary_key=True, verbose_name='ID')
+    id_jogador = models.AutoField(primary_key=True, verbose_name='Id jogador(a)')
     id_escolaridade = models.ForeignKey(Escolaridade, on_delete=models.SET_DEFAULT, default=0, null=True, verbose_name='Escolaridade')
     id_idioma = models.ForeignKey(Idioma, on_delete=models.SET_DEFAULT, default=0, null=True, verbose_name='Idioma')
 
@@ -55,12 +53,12 @@ class Jogador(models.Model):
     nm_email= models.EmailField(max_length=50,unique=True, verbose_name='E-mail')
     _nm_senha= models.CharField(max_length=20,db_column='nm_senha', null=True,verbose_name='Senha')
     
-    dt_inclusao = models.DateTimeField(auto_now_add=True, verbose_name='Data Inlusão')
-    id_usuario_inclusao = models.IntegerField(default=0, verbose_name='Usuário Inclusao')
-    dt_alteracao = models.DateTimeField(auto_now_add=True, blank=True, null=True, verbose_name='Data Alteração') #Pode receber None
-    id_usuario_alteracao = models.IntegerField(default=0, null=True, verbose_name='Usuário Alteração')
-    dt_exclusao = models.DateTimeField(blank=True, null=True, verbose_name='Data Exclusão') #Pode receber None
-    id_usuario_exclusao = models.IntegerField(default=0, null=True, verbose_name='Usuário Exclusão')
+    dt_inclusao = models.DateTimeField(auto_now_add=True, verbose_name='Data inlusão')
+    id_usuario_inclusao = models.IntegerField(default=0, verbose_name='Usuário inclusao')
+    dt_alteracao = models.DateTimeField(auto_now_add=True, blank=True, null=True, verbose_name='Data alteração') #Pode receber None
+    id_usuario_alteracao = models.IntegerField(default=0, null=True, verbose_name='Usuário alteração')
+    dt_exclusao = models.DateTimeField(blank=True, null=True, verbose_name='Data exclusão') #Pode receber None
+    id_usuario_exclusao = models.IntegerField(default=0, null=True, verbose_name='Usuário exclusão')
 
     def __str__(self) -> str:
         return self.nm_avatar
