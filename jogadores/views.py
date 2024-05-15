@@ -23,14 +23,17 @@ class JogadorCreateView(CreateView):
 # Create your views here.
 def home(request):
     # Acessa informações da sessão
-    print('Sebastiao')
-    print(request.session)
     id = request.session.get('id_jogador', 'None') #'1' #request.session['id_jogador']
-    avatar =  request.session.get('nm_avatar','None')
-    nome =  request.session.get('nm_jogador', 'None')
+    avatar = request.session.get('nm_avatar','None')
+    nome = request.session.get('nm_jogador', 'None')
+    genero = request.session.get('tp_genero', 'N')
+    #print('From Jogadores' + context.get('nm_avatar','None'))
+
+    #print('CONTEXT: ID = ' + str(context.get('id_jogador')) + ', Nome = ' + context.get('nm_jogador'))
+    #print('CONTEXT: ID = ' + str(context['id_jogador']) + ', Nome = ' + context['nm_jogador'] + ', Avatar = ' + context['nm_avatar'] + ', Gênero = ' + context['tp_genero'])
 
     # Passa os valores para o contexto
-    context = {'id_jogador': id, 'nm_avatar': avatar, 'nm_jogador': nome}
+    context = {'id_jogador': id, 'nm_avatar': avatar, 'nm_jogador': nome, 'tp_genero' : genero}
     return render(request, 'home.html', context)
 
 def identifica_jogador(request):
@@ -50,8 +53,13 @@ def identifica_jogador(request):
                 request.session['id_jogador'] = jogador.id_jogador
                 request.session['nm_avatar'] = jogador.nm_avatar
                 request.session['nm_jogador'] = jogador.nm_jogador
+                request.session['tp_genero'] = jogador.tp_genero
+                context = {'id_jogador': str(jogador.id_jogador), 'nm_avatar': jogador.nm_avatar, 'nm_jogador': jogador.nm_jogador, 'tp_genero': jogador.tp_genero}
+                
+                #print(request.session.get('id_jogador','None') )
                 #return render(request, 'home.html', {'form': form})
-                return redirect(reverse('home'), {'form': form})
+                return redirect(reverse('home'), context)
+                #return render(request, 'home.html', context)
             else:
                 form.add_error(None, 'Email ou senha inválidos')
                 return render(request, 'identifica_jogador.html', {'form': form})

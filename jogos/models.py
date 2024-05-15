@@ -72,6 +72,7 @@ class Frase(models.Model):
     id_idioma_2 = models.ForeignKey(j.Idioma, related_name='frases_idioma_2', on_delete=models.SET_DEFAULT, default=2, null=True, verbose_name='Idioma aprendizado')    
     ds_frase_idioma_1 = models.CharField(max_length=100, unique=True, verbose_name='Frase idioma nativo')
     ds_frase_idioma_2 = models.CharField(max_length=100, verbose_name='Frase idioma aprendizado' )
+    ds_frase_idioma_2_observacao = models.CharField(max_length=50, null=True, verbose_name='Frase idioma aprendizado' )
     nm_arquivo_imagem = models.CharField(max_length=50, null=True, verbose_name='Nome arquivo de imagem')
     nm_arquivo_som = models.CharField(max_length=50, null=True, verbose_name='Nome arquivo de som')
     dt_inclusao = models.DateTimeField(auto_now_add=True, verbose_name='Data inclusão')
@@ -109,6 +110,7 @@ class Partida(models.Model):
     id_idioma_1 = models.ForeignKey(j.Idioma, related_name='partida_idioma_1', on_delete=models.SET_DEFAULT, default=1, null=True, verbose_name='Idioma nativo')    
     id_idioma_2 = models.ForeignKey(j.Idioma, related_name='partida_idioma_2', on_delete=models.SET_DEFAULT, default=2, null=True, verbose_name='Idioma aprendizado')    
     id_jogo = models.ForeignKey(Jogo, on_delete=models.SET_DEFAULT, default=0, null=True, verbose_name='Jogo escolhido')    
+    id_jogador = models.ForeignKey(j.Jogador, on_delete=models.SET_DEFAULT, default=0, null=True, verbose_name='Jogador(a)')
     tp_recurso = models.CharField(max_length=1, choices=Choices_Tipo_Recurso.choices, verbose_name='Tipo recurso')
     qt_pontos = models.IntegerField(default=0, verbose_name='Pontuação')
     qt_acerto = models.IntegerField(default=0, verbose_name='Acertos')
@@ -132,6 +134,7 @@ class Partidas_Resumo(models.Model):
     id_idioma_1 = models.ForeignKey(j.Idioma, related_name='partidas_resumo_idioma_1', on_delete=models.SET_DEFAULT, default=1, null=True, verbose_name='Idioma nativo')    
     id_idioma_2 = models.ForeignKey(j.Idioma, related_name='partidas_idioma_2', on_delete=models.SET_DEFAULT, default=2, null=True, verbose_name='Idioma aprendizado')    
     id_jogo = models.ForeignKey(Jogo, on_delete=models.SET_DEFAULT, default=0, null=True, verbose_name='Jogo escolhido')    
+    id_jogador = models.ForeignKey(j.Jogador, on_delete=models.SET_DEFAULT, default=0, null=True, verbose_name='Jogador(a)')
     qt_pontos = models.IntegerField(default=0, verbose_name='Pontuação')
     qt_acerto = models.IntegerField(default=0, verbose_name='Acertos')
     qt_erro = models.IntegerField(default=0, verbose_name='Erros')
@@ -146,44 +149,3 @@ class Partidas_Resumo(models.Model):
 
     def __str__(self) -> str:
         return self.id_partida + ' ' + self.id_idioma_2 + ' ' + self.id_jogo  
-'''
-class Escolaridade(models.Model):
-    id_escolaridade = models.AutoField(primary_key=True, default=0)
-    nm_escolaridade = models.CharField(max_length=30, unique=True)
-    ds_escolaridade = models.CharField(max_length=100, null=True)
-    vl_escolaridade = models.IntegerField(default=0, null=True)
-    dt_inclusao = models.DateTimeField(auto_now_add=True)
-    id_usuario_inclusao = models.IntegerField(default=0)
-    dt_alteracao = models.DateTimeField(auto_now_add=True, blank=True, null=True) #Pode receber None
-    id_usuario_alteracao = models.IntegerField(default=0, null=True)
-    dt_exclusao = models.DateTimeField(auto_now_add=True, blank=True, null=True) #Pode receber None
-    id_usuario_exclusao = models.IntegerField(default=0, null=True)
-
-    def __str__(self) -> str:
-        return self.nm_escolaridade
-    
-
-class Jogador(models.Model):    
-    id_jogador = models.AutoField(primary_key=True, verbose_name='ID')
-    id_escolaridade = models.ForeignKey(Escolaridade, on_delete=models.SET_DEFAULT, default=0, null=True, verbose_name='Escolaridade')
-    id_idioma = models.ForeignKey(Idioma, on_delete=models.SET_DEFAULT, default=0, null=True, verbose_name='Idioma')
-
-    nm_jogador = models.CharField(max_length=80, verbose_name='Nome Jogador(a)')
-    nm_avatar = models.CharField(max_length=20,unique=True, verbose_name='Nome Avatar')
-    nm_arquivo_imagem = models.CharField(max_length=50, verbose_name='Nome Arquivo Imagem', null=True)
-    dt_nascimento = models.DateField(null=True, verbose_name='Data Nascimento')
-    tp_genero = models.CharField(max_length=1, choices=Choices_Tipo_Genero.choices, null=True, verbose_name='Gênero')
-    cd_cep = models.CharField(max_length=8, null=True, verbose_name='CEP')
-    nm_email= models.EmailField(max_length=50,unique=True, verbose_name='E-mail')
-    _nm_senha= models.CharField(max_length=20,db_column='nm_senha', null=True,verbose_name='Senha')
-    
-    dt_inclusao = models.DateTimeField(auto_now_add=True, verbose_name='Data inclusão')
-    id_usuario_inclusao = models.IntegerField(default=0, verbose_name='Usuário Inclusao')
-    dt_alteracao = models.DateTimeField(auto_now_add=True, blank=True, null=True, verbose_name='Data Alteração') #Pode receber None
-    id_usuario_alteracao = models.IntegerField(default=0, null=True, verbose_name='Usuário Alteração')
-    dt_exclusao = models.DateTimeField(blank=True, null=True, verbose_name='Data Exclusão') #Pode receber None
-    id_usuario_exclusao = models.IntegerField(default=0, null=True, verbose_name='Usuário Exclusão')
-
-    def __str__(self) -> str:
-        return self.nm_avatar
-'''

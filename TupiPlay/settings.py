@@ -27,8 +27,8 @@ SECRET_KEY = 'django-insecure-_=&)1kvo2y_p6m+j*%+4u+d$_)r1&@yuqld8v+hg&g2ij*jdc_
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -127,3 +127,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Minhas modificações
+SESSION_ENGINE = "django.contrib.sessions.backends.cache" 
+SESSION_COOKIE_AGE = 3600

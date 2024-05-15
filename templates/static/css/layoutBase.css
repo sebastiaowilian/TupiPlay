@@ -177,6 +177,13 @@ a {
 	color: inherit;
 }
 
+.overflow-text{
+	width:150px;
+	overflow:hidden;
+	white_space:nowrap;
+	text-overflow: ellipsis;
+	color:red;
+}
 
 
 /* Altera o estilo dos elementos para serem apresentados */ 
