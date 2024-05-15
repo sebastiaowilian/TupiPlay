@@ -39,14 +39,12 @@ def home(request):
 def identifica_jogador(request):
     if request.method == "GET":
         form = FormIdentificaJogador()
-        #return render(request, 'inclui_jogador.html', {'form':form})
         return render(request, "identifica_jogador.html",{'form':form})
-    elif request.method== "POST":
+    elif request.method == "POST":
         form = FormIdentificaJogador(request.POST)
         if form.is_valid():  
             email = form.cleaned_data['nm_email']
             senha = form.cleaned_data['_nm_senha']    
-
             jogador = Jogador.objects.filter(nm_email=email,_nm_senha=senha).first()
             request.session.clear()
             if jogador:                
@@ -55,18 +53,12 @@ def identifica_jogador(request):
                 request.session['nm_jogador'] = jogador.nm_jogador
                 request.session['tp_genero'] = jogador.tp_genero
                 context = {'id_jogador': str(jogador.id_jogador), 'nm_avatar': jogador.nm_avatar, 'nm_jogador': jogador.nm_jogador, 'tp_genero': jogador.tp_genero}
-                
-                #print(request.session.get('id_jogador','None') )
-                #return render(request, 'home.html', {'form': form})
                 return redirect(reverse('home'), context)
-                #return render(request, 'home.html', context)
             else:
                 form.add_error(None, 'Email ou senha inválidos')
                 return render(request, 'identifica_jogador.html', {'form': form})
-                #return redirect(reverse('identifica_jogador'), {'form': form})
         else:
             return render(request, 'identifica_jogador.html', {'form': form})    
-            #return redirect(reverse('identifica_jogador'), {'form': form})
     
 
 def inclui_jogador(request):
