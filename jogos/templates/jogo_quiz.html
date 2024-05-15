@@ -6,17 +6,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
 <script>
-  function validarOpcao() {
-    
+  function validarformQuiz(event) {
+    event.preventDefault();
     if (document.getElementById('opcao1').checked==false && document.getElementById('opcao2').checked==false && document.getElementById('opcao3').checked==false && document.getElementById('opcao4').checked==false && document.getElementById('opcao5').checked==false) {
         alert("Por favor, selecione uma opção.");
-        return false; // Impede o envio do formulário
+        return false;
     }
     else{
       var a = 0;
-      if(document.getElementById('opcao1').checked){
-        a = parseInt(document.getElementById('opcao1').value);
-      }
+      if(document.getElementById('opcao1').checked){a = parseInt(document.getElementById('opcao1').value);}
       if(document.getElementById('opcao2').checked){a = parseInt(document.getElementById('opcao2').value);}
       if(document.getElementById('opcao3').checked){a = parseInt(document.getElementById('opcao3').value);}
       if(document.getElementById('opcao4').checked){a = parseInt(document.getElementById('opcao4').value);}
@@ -35,8 +33,8 @@
 
       return true; // Permite o envio do formulário se uma opção foi selecionada
     }
-    return false;
-}
+    document.getElementById('formQuiz').submit();
+  }
 </script>
 <style type="text/css">  
   .divTemplateTitulo{
@@ -116,7 +114,7 @@
     
         
         
-        <form action="{% url 'jogo_quiz' %}" method="POST">{% csrf_token %}
+        <form id ="formQuiz" action="{% url 'jogo_quiz' %}" method="POST" >{% csrf_token %}
           <div class="divTemplateConteudo">
             <div class="divTemplateConteudoTopo">     
               <div class="divTemplateConteudoTopoDetalhe">                  
@@ -165,7 +163,7 @@
             {% endfor%}
             
           <div class="divTemplateConteudoBotao">                       
-              <input type="submit" class='btn btn-success' style="margin-right:20px" value="Responder" onclick="validarOpcao()"><input type="submit" class='btn btn-primary' style="margin-right:20px" value="Pular"><input type="submit" class='btn btn-danger' style="margin-right:20px" value="Encerrar">
+              <input type="submit" class='btn btn-success' style="margin-right:20px" value="Responder" onclick="validarformQuiz(event);"><input type="submit" class='btn btn-primary' style="margin-right:20px" value="Pular"><input type="submit" class='btn btn-danger' style="margin-right:20px" value="Encerrar">
           </div>
         </div>
         </form>
