@@ -79,10 +79,21 @@ WSGI_APPLICATION = 'TupiPlay.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "dbTupiPlay",
+        "USER": "root",#"USER": "usrTupiPlay",
+        "PASSWORD": "Pl3as3@Sebah",#"PASSWORD": "TupyPlay@2024",
+        "HOST": "127.0.0.1",
+        "PORT": "3306",
     }
 }
 

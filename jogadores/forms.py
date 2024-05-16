@@ -11,5 +11,5 @@ class FormJogador(ModelForm):
         }
 
 class FormIdentificaJogador(forms.Form):
-    nm_email = forms.EmailField()       
-    _nm_senha = forms.CharField(widget=forms.PasswordInput())
+    nm_email = forms.EmailField(label='E-mail')       
+    _nm_senha = forms.CharField(widget=forms.PasswordInput(), label='Senha')

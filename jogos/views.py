@@ -15,7 +15,7 @@ def home(request):
     genero = request.session.get('tp_genero', 'None')
 
     #print(context['id_jogador'])
-    print('ejejejeje' + context.get('id_jogador'))
+    #print('ejejejeje' + context.get('id_jogador'))
 
     # Passa os valores para o contexto
     context = {'id_jogador': id, 'nm_avatar': avatar, 'nm_jogador': nome, 'tp_genero':genero}
