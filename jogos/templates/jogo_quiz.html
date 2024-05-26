@@ -20,19 +20,41 @@
       if(document.getElementById('opcao4').checked){a = parseInt(document.getElementById('opcao4').value);}
       if(document.getElementById('opcao5').checked){a = parseInt(document.getElementById('opcao5').value);}
 
-      if(a == parseInt(document.getElementById('resposta').value)){
-        alert("Você acertou!");
+      if(a == parseInt(document.getElementById('resposta').value)){       
+        showAcerto();
         document.getElementById('id_qt_pontos').value = parseInt(document.getElementById('id_qt_pontos').value) + 1;
         document.getElementById('id_qt_acerto').value = parseInt(document.getElementById('id_qt_acerto').value) + 1;
       }else
       {
-        alert("Você errou!");
+        showErro();
         document.getElementById('id_qt_erro').value = parseInt(document.getElementById('id_qt_erro').value) + 1;
       }
       document.getElementById('id_num_questao').value = parseInt(document.getElementById('id_num_questao').value) + 1; 
     }
     document.getElementById('formQuiz').submit();
   }
+
+  function showAcerto() {
+    const somMensagem = document.getElementById('som-acerto');
+    document.getElementById('fundo-modal').style.display = 'block';
+    document.getElementById('mensagem-acerto').style.display = 'block';
+    somMensagem.play();
+    setTimeout(function() {
+      document.getElementById('fundo-modal').style.display = 'none';
+      document.getElementById('mensagem-acerto').style.display = 'none';
+    }, 100000);
+  };  
+
+  function showErro() {
+    const somMensagem = document.getElementById('som-erro');
+    document.getElementById('fundo-modal').style.display = 'block';
+    document.getElementById('mensagem-erro').style.display = 'block';
+    somMensagem.play();
+    setTimeout(function() {
+      document.getElementById('fundo-modal').style.display = 'none';
+      document.getElementById('mensagem-erro').style.display = 'none';
+    }, 100000);
+  };   
 </script>
 <style type="text/css">  
   .divTemplateTitulo{
@@ -69,6 +91,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
   }  
+
   .divTemplateConteudoTopoDetalhe{
     background-color:#F5F5F5;    
     margin-top:10px;    
@@ -99,6 +122,26 @@
     margin-bottom:-6px;
   }  
   
+  #fundo-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+
+  .mensagem{    
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    align-items: center;
+    justify-content: center;    
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    /* Adicione mais estilos aqui conforme necessário */
+  }
 </style>
 {% endblock %}
 
@@ -151,6 +194,20 @@
               
             </div>
 
+            
+            <div id="fundo-modal" style="display:none;"></div>
+            <div id="mensagem-acerto" class="mensagem"style="display:none;">
+              <p style="font-family: 'Poetsen One', sans-serif; color: #00DF4C; font-size:50px">Você acertou  !!!</p>
+              <img onclick= "alert('Sebastião');" src="{% static '/img/indioSorrindo.jpeg' %}" style="heigh:200px; width:300px" alt="Acertou">
+              <audio id="som-acerto" src="{% static '/img/Acerto.mp3' %}"></audio>
+            </div>
+            <div id="mensagem-erro" class="mensagem"style="display:none;">
+              <p style="font-family: 'Poetsen One', sans-serif; color: #DF0000; font-size:50px">Você errou !!!</p>
+              <img src="{% static '/img/indiaChorando.jpeg' %}" style="heigh:200px; width:300px" alt="Acertou">
+              <audio id="som-erro" src="{% static '/img/Erro.mp3' %}"></audio>
+            </div>
+
+
  
             <p style="font-size:18px;color:black;">Como se diz em Tupi <span style="font-size:20px;color:black;font-weight:bold;">“{{ Pergunta.ds_frase_idioma_1 }}”</span> ?</p>
             <input type="hidden" name="resposta" id="resposta" value="{{ Pergunta.id_frase }}">
@@ -161,7 +218,7 @@
             {% endfor%}
             
           <div class="divTemplateConteudoBotao">                       
-              <input type="submit" class='btn btn-success' style="margin-right:20px" value="Responder" onclick="validarformQuiz(event);"><input type="submit" class='btn btn-primary' style="margin-right:20px" value="Pular"><input type="submit" class='btn btn-danger' style="margin-right:20px" value="Encerrar">
+              <input type="submit" class='btn btn-success' style="margin-right:20px" value="Responder" onclick="validarformQuiz(event);"><input type="submit" class='btn btn-primary' style="margin-right:20px" value="Pular"><button onclick="window.location.href='{% url 'home' %}'" class='btn btn-danger' style="margin-right:20px">Encerrar</button>
           </div>
         </div>
         </form>
